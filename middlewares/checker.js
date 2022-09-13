@@ -1,4 +1,4 @@
-const { generic } = require("../../fever-clone-server/errors/auth");
+const { generic } = require("../errors/auth");
 
 module.exports = (...fields) => (req, res, next) =>{
     for(const field of fields) {

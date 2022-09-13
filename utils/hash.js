@@ -8,9 +8,9 @@ const encrypt = async (password) =>{
 
 const compare = (plain) => async (hash) => {
     return await bcrypt.compare(plain, hash);
-}
+};
 
 module.exports = {
     encrypt,
     compare,
-}
+};

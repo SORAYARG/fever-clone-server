@@ -1,6 +1,7 @@
 const hash = require("./hash");
 const cookie = require("./cookies");
 const jwt =  require("./jwt");
+const mailer = require("./mailer");
 
 const serialize = (res, payload) => {
     const token = jwt.sign(payload);
@@ -22,6 +23,7 @@ module.exports = {
     hash,
     cookie,
     jwt,
+    mailer,
     serialize,
     deserialize,
-}
+};

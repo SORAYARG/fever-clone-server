@@ -64,5 +64,16 @@ CREATE TABLE IF NOT EXISTS tickets (
   user_id uuid REFERENCES users,
    ON UPDATE CASCADE
    ON DELETE SET NULL,
-   number SMALLINT NOT NULL
+  number SMALLINT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS categories_users (
+  id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+  category_id uuid REFERENCES categories(id)
+   ON UPDATE CASCADE
+   ON DELETE SET NULL,
+  user_id uuid REFERENCES users(id)
+   ON UPDATE CASCADE
+   ON DELETE SET NULL
+);
+

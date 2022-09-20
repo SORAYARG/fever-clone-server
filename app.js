@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+// const stripe = require("./configs/stripe")
 // const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const errors = require("./errors/commons");

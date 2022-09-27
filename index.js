@@ -1,13 +1,33 @@
-require("dotenv").config();
-const app = require("./app");
-// const options = require("./configs/cors");
+const express = require("express");
+const app = express();
+// const stripe = require("./configs/stripe")
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const errors = require("./errors/commons");
 
 
-const main = async () => {
-  (await app()).listen(process.env.PORT, () =>
-  console.info(`🎈listening at: ${process.env.PORT}`
-  )
-  );
+module.exports = async () => {
+  const db = await require("./configs/db");
+  app.use(cors());
+  app.use(express.json());
+  
+  app.use(cookieParser());
+  app.use(require("./service")(db));
+
+  app.use((_, __, next) => {
+    next(errors[404]);
+  });
+  
+  app.use(({ statusCode, error }, _, res, __) => {
+    res.status(statusCode).json({
+      success: false,
+      message: error.message,
+    });
+  });
+
+  return app;
 };
 
-main();
+app.listen(process.env.PORT || 3001, () =>
+  console.info(`🎈listening at: ${process.env.PORT} || 3001 `)
+);

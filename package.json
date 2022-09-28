@@ -23,7 +23,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
     "start": "NODE_ENV=production node index.js",
-    "db": "node scripts/db.js"
+    "db": "node scripts/db.js",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",

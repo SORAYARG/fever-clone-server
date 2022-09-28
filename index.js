@@ -1,33 +1,11 @@
-const express = require("express");
-const app = express();
-// const stripe = require("./configs/stripe")
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const errors = require("./errors/commons");
+const app = require("./app");
+const { PORT } = require("./environments")
 
-
-module.exports = async () => {
-  const db = await require("./configs/db");
-  app.use(cors());
-  app.use(express.json());
-  
-  app.use(cookieParser());
-  app.use(require("./service")(db));
-
-  app.use((_, __, next) => {
-    next(errors[404]);
-  });
-  
-  app.use(({ statusCode, error }, _, res, __) => {
-    res.status(statusCode).json({
-      success: false,
-      message: error.message,
-    });
-  });
-
-  return app;
+const main = async () => {
+  (await app()).listen(PORT, () =>
+    console.info(
+      `> 🎈listening at ${PORT} | environment: ${process.env.NODE_ENV}`
+    )
+  );
 };
-
-app.listen(process.env.PORT || 3001, () =>
-  console.info(`🎈listening at: ${process.env.PORT} || 3001 `)
-);
+main();

@@ -4,4 +4,4 @@ const authorizer = require("./authorizer");
 module.exports = {
     checker,
     authorizer
-}
+};

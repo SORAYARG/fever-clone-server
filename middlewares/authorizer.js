@@ -1,5 +1,5 @@
-const { deserialize } = require("../../fever-clone-server/utils");
-const errors = require("../../fever-clone-server/errors/commons");
+const { deserialize } = require("../utils");
+const errors = require("../errors/commons");
 
 module.exports = (req, res, next) => {
   const payload = deserialize(req);
